@@ -1,0 +1,56 @@
+<div class="card" style="background-color: skyblue; color: darkblue">
+  <h1 class="display-1">MyLinkedIn</h1>
+  <button (click)="log = !log" type="button" class="btn btn-outline-primary btn-sm">Login</button>
+  <div class="card" *ngIf="log">
+    <form>
+      <div class="mb-3">
+        <label for="inputEmail" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
+               [(ngModel)]="inputLog.email" required="true" name="email">
+      </div>
+      <div class="mb-3">
+        <label for="inputPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword"
+               [(ngModel)]="inputLog.password" required="true" name="password">
+        <div id="emailHelp" class="form-text">We'll never share your password with anyone else.</div>
+      </div>
+      <button (click)="sendCredential()" type="submit" class="btn btn-primary" [disabled]="!inputLog.email || !inputLog.password"> Submit</button>
+      <div class="alert alert-danger" role="alert" *ngIf="!auth">
+        Wrong credentials
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="!admin">
+        You are not an Admin!!!
+      </div>
+      <!--
+      Da aggiungere nella home page di applicant e offeror
+      -------
+      <button type="button" class="btn btn-primary" routerLink="/registrationRequest">Sign in as an Admin</button>
+      -------
+      -->
+    </form>
+  </div>
+</div>
+<div class="card" >
+  <img src="http://localhost:8080/public/download/home.png" class="card-img-top" style="size: auto"/>
+  <div class="card-body" style="background-color: skyblue">
+    <p class="card-text" style="color: darkblue">The application to find work quickly, perhaps</p>
+  </div>
+</div>
+<div class="card border-primary" *ngFor="let item of visiblePosts">
+  <div class="card-header" style="background-color: skyblue"><h3>{{item.type}}</h3></div>
+  <div class="card-body">
+      {{item.nameAndSurnameUser}} <br>
+      {{item.datetime | date: 'dd/MM/yyyy' }} <br>
+    <div *ngFor="let element of item.dataDTOList">
+      <div *ngIf="element.field !== 'Foto'">
+        {{element.field}}: {{element.data}} <br>
+      </div>
+    </div>
+    <div *ngFor="let element of item.dataDTOList">
+      <div *ngIf="element.field === 'Foto'">
+        <img src={{element.dataFilePath}} class="card-img" style="width: 45rem; height: 30rem">
+      </div>
+    </div>
+  </div>
+</div>
+

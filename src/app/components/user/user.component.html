@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MyLinkedIn</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/adminhome">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/users">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/registrationrequest">Registration Request</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/skil">Skils</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/posttype">Post Type</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/chat">Chat</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile">Your profile</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<h3>Users</h3>
+<div class="card" style="width: 45rem;">
+<form>
+  <section class="mb-3">
+    <label for="receiver" class="form-label"></label>
+    <input type="text" class="form-control" id="receiver" name="searchInput" [(ngModel)]="searchInput"
+           placeholder="Search user" required="true" name="idReceiver">
+    <div *ngFor="let u of allUsers | searchPipe: searchInput">
+      <a (click)="moreDetails(u)"  class="card-link" style="color: black">Id: {{u.id}} Name: {{u.name}} {{u.surname}}</a>
+    </div>
+  </section>
+</form>
+</div>
+<div class="card" style="width: 45rem; border-color: black" *ngFor="let item of allUsers">
+  <div class="card-header row" style="background-color: skyblue; width: 45.6rem">
+    <h3 class="col">Id: {{item.id}} - {{item.name}}  {{item.surname}}</h3>
+    <button (click)="enableDisableUser(item)" type="button" class="btn btn-danger col btn-sm" style="size: auto">Enabling/Disabling User</button>
+  </div>
+  Role: {{item.role}}<br>
+  Birthday: {{item.birthday}}<br>
+  Age: {{item.age}}<br>
+  Email: {{item.email}}<br>
+  <div *ngIf="item.role !=='Admin' ">
+    Enabling: {{item.enabling}}<br>
+    Registered: {{item.registered}}<br>
+  </div>
+  <a *ngIf="item.role=='Offeror' || item.role=='Applicant'" class="card-link" style="color: blue" (click)="moreDetails(item)">More details</a>
+</div>

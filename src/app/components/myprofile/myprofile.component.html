@@ -1,0 +1,83 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MyLinkedIn</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/adminhome">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/users">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/registrationrequest">Registration Request</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/skil">Skils</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/posttype">Post Type</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/chat">Chat</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile">Your profile</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<h3>Your Profile</h3>
+<div class="card bg-dark text-white">
+  <div *ngIf="newProfileImage.id === 0">
+    <img src="http://localhost:8080/public/download/generico.jpg" class="card-img" width="800" height="800">
+  </div>
+  <div *ngIf="newProfileImage.id !== 0">
+    <img src={{newProfileImage.path}} class="card-img" width="800" height="800">
+  </div>
+
+  <div class="card-img-overlay">
+    <h3 class="card-title" style="color: darkblue">{{myUser.name}} {{myUser.surname}}</h3>
+    <h4 class="card-text" style="color: darkblue">{{myUser.role}}</h4>
+    <p class="card-text" style="color: darkblue">{{myUser.email}}</p>
+    <p class="card-text" style="color: darkblue">Birthday: {{myUser.birthday}}</p>
+    <p class="card-text" style="color: darkblue">Age: {{myUser.age}}</p>
+    <p class="card-text" style="color: darkblue">{{newProfileImage.description}}</p>
+  </div>
+</div>
+<div class="row" style="background-color: skyblue">
+  <h5>Change or add profile image</h5>
+  <div class="col">
+    <input type="file" (change)="onFileSelected($event)" multiple="multiple">
+    <button type="button" class="btn btn-primary" (click)="uploadButton()">Upload file</button>
+  </div>
+  <div class="col">
+    <h5>Change your description</h5>
+      <div class="col">
+        <form>
+          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="newDescription"
+                 placeholder="Insert description" required="true" name="description">
+        </form>
+      </div>
+      <div class="col">
+        <button  (click)="updateDescription()" type="button" class="btn btn-primary" [disabled]="!newDescription">Add</button>
+      </div>
+      <div class="col">
+        <h5>Change your age</h5>
+        <form>
+          <input type="number" class="form-control" id="age" name="age" [(ngModel)]="newAge"
+                 placeholder="Insert new Age" required="true" name="age">
+        </form>
+      </div>
+      <div class="col">
+        <button  (click)="updateAge()" type="button" class="btn btn-primary" [disabled]="!newAge">Update</button>
+      </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MyLinkedIn</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/adminhome">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/users">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/registrationrequest">Registration Request</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/skil">Skils</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/posttype">Post Type</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/chat">Chat</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile">Your profile</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<h3>Post Type Management</h3>
+<div class="row">
+<div class="col-sm-6">
+  <div class="card-header" style="background-color: skyblue; width: 36rem">
+    <h4>All post Type</h4>
+  </div>
+  <div class="card" style="width: 36rem;" *ngFor="let item of allPostType">
+    <h5>{{item.type}}</h5>
+    <div *ngFor="let reqField of item.requiredFields">
+      {{reqField}}
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <button (click)="deletePostType(item)" type="button" class="btn btn-danger btn-sm">Delete</button>
+      </div>
+    </div>
+    </div>
+  </div>
+
+ <div class="col-sm-6">
+   <div class="card-header" style="background-color: skyblue; width: 36rem">
+    <h4>Add Post Type</h4>
+   </div>
+  <div class="card" style="width: 36rem;">
+    <form #typeForm="ngForm" (ngSubmit)="addType()">
+      <div class="mb-3">
+        <label for="InputType" class="form-label">New type</label>
+        <input type="string" class="form-control" id="InputType"
+             #newType="ngModel"
+             [(ngModel)]="newPostType.type"
+             name="type"
+             required="true"
+             [ngClass]="{'is-invalid': newType.errors && newType.touched}">
+     </div>
+      <div *ngFor="let req of newRequiredFields">
+        {{req}}
+      </div>
+      <div class="mb-3">
+        <label for="InputRegField" class="form-label"> Required field
+          <input type="string" class="form-control" id="InputRegField"
+             [(ngModel)]="newPostType.requiredFields"
+             name="requiredFields">
+          <div class="form-text">click on "Add required field" before adding the new type</div>
+          <button (click)="setNewField()" type="button" class="btn btn-outline-primary" [disabled]="!typeForm.form.valid">Add required field</button>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-outline-success" [disabled]="!typeForm.form.valid">Add Type</button>
+      <div class="alert alert-danger" role="alert" *ngIf="control">
+        TYPE OF POST ALREDY EXISTING!
+      </div>
+    </form>
+  </div>
+ </div>
+</div>
