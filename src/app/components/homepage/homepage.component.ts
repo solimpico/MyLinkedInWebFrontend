@@ -6,7 +6,6 @@ import {UtilityService} from '../../services/utility.service';
 import {InputLogin} from '../../model/input-login';
 import {Logintoken} from '../../model/logintoken';
 import {Router} from '@angular/router';
-import {User} from '../../model/user';
 import {UserService} from '../../services/user.service';
 
 @Component({

@@ -27,6 +27,6 @@ export class SkilService {
   }
 
   getSkilById(idSkil: number): Observable<Skil>{
-    return this.http.get<Skil>('http://localhost:8080/admin/getSkilById/' + idSkil, {headers: this.headers});
+    return this.http.get<Skil>('http://localhost:8080/getSkilById/' + idSkil, {headers: this.headers});
   }
 }

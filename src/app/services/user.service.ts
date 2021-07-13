@@ -18,8 +18,6 @@ export class UserService {
     'Content-type': 'application/json',
   });
 
-  registrationRequest: User[] = [];
-
   constructor(private http: HttpClient) { }
 
   getRegistrationRequest(): Observable<User[]> {
@@ -56,18 +54,6 @@ export class UserService {
 
   updateAge(age: number): Observable<User>{
     return this.http.put<User>('http://localhost:8080/updateAge/' + age, {}, {headers: this.headers});
-  }
-
-  /*findByName(name: string): User[]{
-    return this.allUsers;
-  }
-  findByNameAndSurname(name: string, surname: string): User[]{
-    return this.allUsers;
-  }*/
-
-  // DA TOGLIERE PER L'ADMIN
-  sendRegistrationRequest(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:8080/public/registrationRequest', user, { headers: this.headers });
   }
 
 }
